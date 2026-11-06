@@ -36,3 +36,8 @@ Minimum nops = 6 (2 between I2 and I3, 2 between I3 and I4, 2 between I5 and I6)
 |---|---|---|---|---|---|
 | 5S-noFW | p2-dependent.s | 16 | 6 | 2.67 | yes |
 | 5S-U | p2-nops.s | 16 | 12 | 1.33 | yes |
+
+## Step 9 prediction (p3-loaduse on 5S-F)
+
+Load-use pairs: lw t1 -> add t2 (1 stall), lw t4 -> sub t5 (1 stall). Total stalls = 2.
+Cycles = 8 + 4 + 2 = 14.

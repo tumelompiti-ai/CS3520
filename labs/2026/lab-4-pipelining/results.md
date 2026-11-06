@@ -22,3 +22,5 @@
 | SC | 12 | 5 | 24 | 29 | 6 | 1.00 | yes |
 | 5S-U | 0 | -7 | 0 | 0 | 10 | 1.67 | no |
 | 5S-F | 12 | 5 | 24 | 29 | 10 | 1.67 | yes |
+## Step 7 prediction
+Minimum nops = 6 (2 between I2 and I3, 2 between I3 and I4, 2 between I5 and I6).

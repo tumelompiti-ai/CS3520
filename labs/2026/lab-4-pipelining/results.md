@@ -41,3 +41,10 @@ Minimum nops = 6 (2 between I2 and I3, 2 between I3 and I4, 2 between I5 and I6)
 
 Load-use pairs: lw t1 -> add t2 (1 stall), lw t4 -> sub t5 (1 stall). Total stalls = 2.
 Cycles = 8 + 4 + 2 = 14.
+## Step 10: p3-loaduse
+
+| Processor | t2 (x + y) | t5 (z - w) | Cycles | CPI | Correct? |
+|---|---|---|---|---|---|
+| SC | 11 | 3 | 8 | 1.00 | yes |
+| 5S-U | ... | ... | ... | ... | ... |
+| 5S-F | ... | ... | ... | ... | ... |

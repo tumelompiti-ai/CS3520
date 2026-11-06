@@ -26,3 +26,10 @@ No. CPI is only cycles per instruction, and it ignores how long each cycle is. E
 SC: 8 cycles x 800 ps = 6400 ps.
 5S-F: 12 cycles x 200 ps = 2400 ps.
 The pipeline finishes p1 in 2400 ps against 6400 ps, a speedup of 6400 / 2400 = about 2.67. The CPI is above 1 only because of the 4 cycles needed to fill the pipeline, and with a short program like this they weigh heavily. The pipeline's much shorter clock period more than makes up for it.
+## Step 5(c)
+On a pipeline without forwarding, a RAW dependence at distance 1 or 2 is a hazard. At distance 3 or more the register file has already been written (written in the first half of the cycle, read in the second), so there is no hazard.
+
+## Step 6
+(a) Prediction on 5S-U, committed before running: t2 = 0, t3 = -7, t4 = 0, t5 = 0.
+(b) See results.md. SC and 5S-F are correct. 5S-U is wrong in t2, t3, t4 and t5. Predicted values matched the measured values.
+(c) The negative value is t3 = -7 (0xfffffff9). I4 (sub t3, t2, t0) read t0 correctly: I1 is 3 instructions earlier, so t0 = 7 had already been written to the register file. But I4 read t2 too early: I3 is only 1 instruction earlier and had not reached WB, so t2 was still 0. The result was 0 - 7 = -7.

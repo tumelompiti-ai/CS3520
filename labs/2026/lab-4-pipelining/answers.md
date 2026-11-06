@@ -43,3 +43,9 @@ On a pipeline without forwarding, a RAW dependence at distance 1 or 2 is a hazar
 
 Think: why does RISC-V require the hardware to guarantee correct results, instead of leaving it to the compiler?
 p2-nops.s only works because it has exactly the right number of nops for a 5-stage pipeline with no forwarding. On a machine with a seven-stage pipeline, results would be written back later, so the same program would have distances that are too short and would give wrong results. It would need recompiling for every processor. If the hardware guarantees correctness, one binary runs correctly on every implementation, old or new, and the hardware only spends extra cycles where a hazard really exists.
+## Step 9
+Prediction on 5S-F: 2 load-use stalls (lw t1 -> add t2, and lw t4 -> sub t5), so cycles = 8 + 4 + 2 = 14. Committed before running.
+
+## Step 10
+Measured: 14 cycles on 5S-F, matching the prediction. SC takes 8 cycles (CPI 1.00); 5S-U takes 12 cycles and gives wrong results (t2 = 0, t5 = 0), because it has no stall or forwarding.
+The add t2, t0, t1 is held back in ID for one cycle (cycle 5 in my numbering, which is cycle 4 in Ripes). The instruction held behind it is lw t3, 8(gp), which stays in IF for that cycle. The same happens a second time with sub t5, t3, t4, and the sw behind it is held in IF.

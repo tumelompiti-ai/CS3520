@@ -1,3 +1,21 @@
+# Lab 4 results
+
+## Step 4: p1-independent
+| Processor | Cycles | Instrs. retired | CPI | Execution time |
+|---|---|---|---|---|
 | SC | 8 | 8 | 1.00 | 6400 ps |
 | 5S-U | 12 | 8 | 1.50 | 2400 ps |
 | 5S-F | 12 | 8 | 1.50 | 2400 ps |
+
+## Step 6 prediction (5S-U), committed before running
+t2 = 0   (t0 is at distance 2 and t1 at distance 1, so both read 0)
+t3 = -7  (t2 is at distance 1, so it reads 0; t0 is at distance 3, so it reads 7; 0 - 7 = -7)
+t4 = 0   (t2 is at distance 2, so it reads 0)
+t5 = 0   (t3 is at distance 2 and t4 at distance 1, so both read 0)
+
+## Step 6 results: p2-dependent
+| Processor | t2 | t3 | t4 | t5 | Cycles | CPI | Correct? |
+|---|---|---|---|---|---|---|---|
+| SC | 12 | 5 | 24 | 29 | 6 | 1.00 | yes |
+| 5S-U | | | | | | | |
+| 5S-F | | | | | | | |

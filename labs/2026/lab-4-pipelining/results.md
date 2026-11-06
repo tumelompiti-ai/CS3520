@@ -24,3 +24,9 @@
 | 5S-F | 12 | 5 | 24 | 29 | 10 | 1.67 | yes |
 ## Step 7 prediction
 Minimum nops = 6 (2 between I2 and I3, 2 between I3 and I4, 2 between I5 and I6).
+## Step 7: p2-nops.s (6 nops)
+
+| Processor | t2 | t3 | t4 | t5 | Cycles | Instrs. retired | CPI | Correct? |
+|---|---|---|---|---|---|---|---|---|
+| 5S-U | 12 | 5 | 24 | 29 | 16 | 12 | 1.33 | yes |
+| 5S-F | 12 | 5 | 24 | 29 | 16 | 12 | 1.33 | yes |

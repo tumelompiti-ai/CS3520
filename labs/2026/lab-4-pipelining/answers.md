@@ -33,3 +33,7 @@ On a pipeline without forwarding, a RAW dependence at distance 1 or 2 is a hazar
 (a) Prediction on 5S-U, committed before running: t2 = 0, t3 = -7, t4 = 0, t5 = 0.
 (b) See results.md. SC and 5S-F are correct. 5S-U is wrong in t2, t3, t4 and t5. Predicted values matched the measured values.
 (c) The negative value is t3 = -7 (0xfffffff9). I4 (sub t3, t2, t0) read t0 correctly: I1 is 3 instructions earlier, so t0 = 7 had already been written to the register file. But I4 read t2 too early: I3 is only 1 instruction earlier and had not reached WB, so t2 was still 0. The result was 0 - 7 = -7.
+## Step 7
+(a) The minimum is 6 nops. The dependences at distance 1 are I2->I3, I3->I4 and I5->I6, and each needs 2 nops between the pair to reach distance 3. These are three separate gaps, so no nop can serve two of them. If I remove any one nop, one pair is left at distance 2, which is a hazard on 5S-U, and the program gives a wrong result.
+(b) On 5S-F, p2-nops.s takes 16 cycles. The nops do no useful work there: forwarding already handles every hazard in p2, so the nops are just 6 wasted cycles (the original p2 takes 10).
+(c) p2-nops on 5S-U has CPI 16 / 12 = 1.33, lower than the original p2 on 5S-F (10 / 6 = 1.67), but it takes 16 cycles against 10. Both can be true because the nops count as retired instructions: they add to the instruction count and pull the CPI down without doing any useful work. CPI alone cannot compare two different programs, because the instruction counts differ. Execution time (cycles x clock period) can.
